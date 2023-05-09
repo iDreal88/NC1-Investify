@@ -20,9 +20,11 @@ struct InvestmentCalculator: View {
     
     // Amount
     func calculateTotal() {
-        guard let initialInvestment_1 = Double(initialInvestment_1),
-              let interestRate_1 = Double(interestRate_1),
-              let yearsInvested_1 = Double(yearsInvested_1) else {
+        guard
+            let initialInvestment_1 = Double(initialInvestment_1),
+            let interestRate_1 = Double(interestRate_1),
+            let yearsInvested_1 = Double(yearsInvested_1)
+                else {
             return
         }
         
