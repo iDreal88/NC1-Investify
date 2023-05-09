@@ -1,5 +1,4 @@
 import SwiftUI
-import Charts
 
 struct InvestmentCalculator: View {
     
@@ -16,7 +15,7 @@ struct InvestmentCalculator: View {
     @State private var totalAmount_2 = ""
    
     @State private var selectedPicker = 0
-    let picker = ["Amount", "Rate"]
+    let picker = ["Total Amount", "Interest Rate"]
     
     // Amount
     func calculateTotal() {
