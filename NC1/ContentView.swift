@@ -2,17 +2,17 @@ import SwiftUI
 
 struct InvestmentCalculator: View {
     
-    //  Amount
-    @State private var initialInvestment_1 = ""
-    @State private var interestRate_1 = ""
-    @State private var yearsInvested_1 = ""
-    @State private var totalAmount_1 = 0.0
+    // Initalize Variable Total Amount
+    @State private var initialInvestment_Amount = ""
+    @State private var interestRate_Amount = ""
+    @State private var yearsInvested_Amount = ""
+    @State private var totalAmount_Amount = 0.0
     
-    // Rate
-    @State private var initialInvestment_2 = ""
-    @State private var interestRate_2: Double = 0.0
-    @State private var yearsInvested_2 = ""
-    @State private var totalAmount_2 = ""
+    // Initialize Variable Interest Rate
+    @State private var initialInvestment_Rate = ""
+    @State private var interestRate_Rate: Double = 0.0
+    @State private var yearsInvested_Rate = ""
+    @State private var totalAmount_Rate = ""
    
     @State private var selectedPicker = 0
     let picker = ["Total Amount", "Interest Rate"]
@@ -20,29 +20,29 @@ struct InvestmentCalculator: View {
     // Amount
     func calculateTotal() {
         guard
-            let initialInvestment_1 = Double(initialInvestment_1),
-            let interestRate_1 = Double(interestRate_1),
-            let yearsInvested_1 = Double(yearsInvested_1)
+            let initialInvestment_Amount = Double(initialInvestment_Amount),
+            let interestRate_Amount = Double(interestRate_Amount),
+            let yearsInvested_Amount = Double(yearsInvested_Amount)
                 else {
             return
         }
         
-        let interestDecimal_1 = interestRate_1 / 100
-        let totalAmount_1 = initialInvestment_1 * pow(1 + interestDecimal_1, yearsInvested_1)
-        self.totalAmount_1 = totalAmount_1
+        let interestDecimal_Amount = interestRate_Amount / 100
+        let totalAmount_Amount = initialInvestment_Amount * pow(1 + interestDecimal_Amount, yearsInvested_Amount)
+        self.totalAmount_Amount = totalAmount_Amount
     }
     
     // Rate
     func calculateRate(){
         guard
-            let totalAmount_2 = Double(self.totalAmount_2),
-            let initialInvestment_2 = Double(self.initialInvestment_2),
-            let yearsInvested_2 = Double(self.yearsInvested_2) else {
+            let totalAmount_Rate = Double(self.totalAmount_Rate),
+            let initialInvestment_Rate = Double(self.initialInvestment_Rate),
+            let yearsInvested_Rate = Double(self.yearsInvested_Rate) else {
             return
         }
         
-        let interestRate_2 =  ((totalAmount_2 / initialInvestment_2 - 1) / yearsInvested_2) * 100
-        self.interestRate_2 = interestRate_2
+        let interestRate_Rate =  ((totalAmount_Rate / initialInvestment_Rate - 1) / yearsInvested_Rate) * 100
+        self.interestRate_Rate = interestRate_Rate
     }
     
     var body: some View {
@@ -66,7 +66,7 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "dollarsign")
                                 .foregroundStyle(.tertiary)
-                            TextField("Amount", text: $initialInvestment_1)
+                            TextField("Amount", text: $initialInvestment_Amount)
                                 .keyboardType(.decimalPad)
                         }
                     }
@@ -75,7 +75,7 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "percent")
                                 .foregroundStyle(.tertiary)
-                            TextField("Percent", text: $interestRate_1)
+                            TextField("Percent", text: $interestRate_Amount)
                                 .keyboardType(.decimalPad)
                         }
                     }
@@ -84,13 +84,13 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "calendar.badge.clock")
                                 .foregroundStyle(.tertiary)
-                            TextField("Years", text: $yearsInvested_1)
+                            TextField("Years", text: $yearsInvested_Amount)
                                 .keyboardType(.decimalPad)
                         }
                     }
                     
                     Section(header: Text("Total Amount")) {
-                        Text("$ \(totalAmount_1, specifier: "%.2f")")
+                        Text("$ \(totalAmount_Amount, specifier: "%.2f")")
                     }
                     
                     Button(action: calculateTotal) {
@@ -105,7 +105,7 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "dollarsign")
                                 .foregroundStyle(.tertiary)
-                            TextField("Amount", text: $initialInvestment_2)
+                            TextField("Amount", text: $initialInvestment_Rate)
                                 .keyboardType(.decimalPad)
                         }
                     }
@@ -114,7 +114,7 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "equal.square")
                                 .foregroundStyle(.tertiary)
-                            TextField("Total", text: $totalAmount_2)
+                            TextField("Total", text: $totalAmount_Rate)
                                 .keyboardType(.decimalPad)
                         }
                     }
@@ -123,30 +123,30 @@ struct InvestmentCalculator: View {
                         HStack{
                             Image(systemName: "calendar.badge.clock")
                                 .foregroundStyle(.tertiary)
-                            TextField("Years", text: $yearsInvested_2)
+                            TextField("Years", text: $yearsInvested_Rate)
                                 .keyboardType(.decimalPad)
                         }
                     }
                     
                     Section(header: Text("Interest Rate")) {
-                        Text(" \(interestRate_2, specifier: "%.2f") %")
+                        Text(" \(interestRate_Rate, specifier: "%.2f") %")
                     }
                     
-                Section {
-                    Button {
-                        calculateRate()
+                    Section {
+                        Button {
+                            calculateRate()
+                        }
+                    label: {
+                        Text("Calculate")
+                            .frame(maxWidth: .infinity)
                     }
-                label: {
-                    Text("Calculate")
-                        .frame(maxWidth: .infinity)
+                    }
                 }
-            }
-        }
             default:
                 Text("Error.")
             }
         }
-   
+        .preferredColorScheme(.dark)
         }
     }
 
