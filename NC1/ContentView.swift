@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct InvestmentCalculator: View {
+struct ContentView: View {
     
     // Initalize Variable Total Amount
     @State private var initialInvestment_Amount = ""
@@ -13,7 +13,7 @@ struct InvestmentCalculator: View {
     @State private var interestRate_Rate: Double = 0.0
     @State private var yearsInvested_Rate = ""
     @State private var totalAmount_Rate = ""
-   
+    
     @State private var selectedPicker = 0
     let picker = ["Total Amount", "Interest Rate"]
     
@@ -23,7 +23,7 @@ struct InvestmentCalculator: View {
             let initialInvestment_Amount = Double(initialInvestment_Amount),
             let interestRate_Amount = Double(interestRate_Amount),
             let yearsInvested_Amount = Double(yearsInvested_Amount)
-                else {
+        else {
             return
         }
         
@@ -47,111 +47,178 @@ struct InvestmentCalculator: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Picker(selection: $selectedPicker, label: Text("picker")) {
-                    ForEach(0..<picker.count) { index in
-                        Text(picker[index])
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                .navigationTitle("Investment Calculator")
-            }
-            
-            
-            switch selectedPicker {
-            case 0:
-                Form {
-                    Section(header: Text("Initial Investment")) {
-                        HStack{
-                            Image(systemName: "dollarsign")
-                                .foregroundStyle(.tertiary)
-                            TextField("Amount", text: $initialInvestment_Amount)
-                                .keyboardType(.decimalPad)
+            ScrollView {
+                VStack {
+                    Picker(selection: $selectedPicker, label: Text("picker")) {
+                        ForEach(0..<picker.count) { index in
+                            Text(picker[index])
                         }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                    .navigationTitle("Investment Calculator")
                     
-                    Section(header: Text("Interest Rate")) {
-                        HStack{
+                    switch selectedPicker {
+                    case 0:
+                        HStack {
+                            Image(systemName: "dollarsign") .foregroundStyle(.white)
+                            Text("Initial Investment")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
+                        }
+                        
+                        TextField("Amount", text: $initialInvestment_Amount)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                        
+                        HStack {
                             Image(systemName: "percent")
-                                .foregroundStyle(.tertiary)
-                            TextField("Percent", text: $interestRate_Amount)
-                                .keyboardType(.decimalPad)
+                                .foregroundStyle(.white)
+                            Text("Interest Rate")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
                         }
-                    }
-                    
-                    Section(header: Text("Years Invested")) {
+                        
+                        TextField("Percent", text: $interestRate_Amount)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                        
                         HStack{
                             Image(systemName: "calendar.badge.clock")
-                                .foregroundStyle(.tertiary)
-                            TextField("Years", text: $yearsInvested_Amount)
-                                .keyboardType(.decimalPad)
+                                .foregroundStyle(.white)
+                            Text("Years Invested")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
                         }
-                    }
-                    
-                    Section(header: Text("Total Amount")) {
-                        Text("$ \(totalAmount_Amount, specifier: "%.2f")")
-                    }
-                    
-                    Button(action: calculateTotal) {
-                        Text("Calculate")
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                
-            case 1:
-                Form {
-                    Section(header: Text("Initial Investment")) {
-                        HStack{
-                            Image(systemName: "dollarsign")
-                                .foregroundStyle(.tertiary)
-                            TextField("Amount", text: $initialInvestment_Rate)
-                                .keyboardType(.decimalPad)
+                        
+                        TextField("Years", text: $yearsInvested_Amount)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                        
+                        VStack{
+                            Text("Total Amount")
+                                .font(.title3)
+                                .fontWeight(.heavy)
+                                .fontDesign(.monospaced)
+                                Spacer()
+                            Text("$ \(totalAmount_Amount, specifier: "%.2f")")
+                                .font(.title3)
                         }
-                    }
-                    
-                    Section(header: Text("Total Amount")) {
-                        HStack{
-                            Image(systemName: "equal.square")
-                                .foregroundStyle(.tertiary)
-                            TextField("Total", text: $totalAmount_Rate)
-                                .keyboardType(.decimalPad)
+    
+                        Button(action: calculateTotal) {
+                            Text("Calculate")
                         }
-                    }
-                    
-                    Section(header: Text("Years Invested")) {
+                        .buttonStyle(.bordered)
+                        
+                        .disabled(initialInvestment_Amount.isEmpty || interestRate_Amount.isEmpty || yearsInvested_Amount.isEmpty)
+              
+                    case 1:
+                        HStack {
+                            Image(systemName: "dollarsign") .foregroundStyle(.white)
+                            Text("Initial Investment")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
+                        }
+                        
+                        TextField("Amount", text: $initialInvestment_Rate)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                            
+                        HStack {
+                            Image(systemName: "equal.square") .foregroundStyle(.white)
+                            Text("Total Amount")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
+                        }
+                        
+                        TextField("Total", text: $totalAmount_Rate)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                        
                         HStack{
                             Image(systemName: "calendar.badge.clock")
-                                .foregroundStyle(.tertiary)
-                            TextField("Years", text: $yearsInvested_Rate)
-                                .keyboardType(.decimalPad)
+                                .foregroundStyle(.white)
+                            Text("Years Invested")
+                                .fontDesign(.monospaced)
+                                .font(.headline)
+                            Spacer()
                         }
-                    }
-                    
-                    Section(header: Text("Interest Rate")) {
-                        Text(" \(interestRate_Rate, specifier: "%.2f") %")
-                    }
-                    
-                    Section {
-                        Button {
-                            calculateRate()
+                        
+                        TextField("Years", text: $yearsInvested_Rate)
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(.roundedBorder)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                            )
+                        
+                            .padding(.bottom)
+                        
+                        VStack{
+                            Text("Interest Rate")
+                                .font(.title3)
+                                .fontWeight(.heavy)
+                                .fontDesign(.monospaced)
+                                Spacer()
+                            Text(" \(interestRate_Rate, specifier: "%.2f") %")
+                                .font(.title3)
                         }
-                    label: {
-                        Text("Calculate")
-                            .frame(maxWidth: .infinity)
-                    }
+    
+                        Button(action: calculateRate) {
+                            Text("Calculate")
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        .disabled(initialInvestment_Rate.isEmpty || totalAmount_Rate.isEmpty || yearsInvested_Rate.isEmpty)
+                    
+                    default:
+                        Text("Error.")
                     }
                 }
-            default:
-                Text("Error.")
+                .padding()
             }
-        }
-        .preferredColorScheme(.dark)
+            .preferredColorScheme(.dark)
         }
     }
+}
 
-struct InvestmentCalculator_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        InvestmentCalculator()
+        ContentView()
     }
 }
