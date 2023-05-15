@@ -55,171 +55,199 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .padding()
+                    .padding(.vertical)
                     .navigationTitle("Investment Calculator")
-                    
+                }
+                
+                VStack {
                     switch selectedPicker {
                     case 0:
                         VStack {
-                            HStack {
-                                Image(systemName: "dollarsign.circle") .foregroundStyle(.white)
-                                Text("Initial Investment")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack {
+                                    Image(systemName: "dollarsign.circle")
+                                    Text("Initial Investment")
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Amount", text: $initialInvestment_Amount)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Amount", text: $initialInvestment_Amount)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
-                        }
-                        .padding(.bottom)
-                        
-                        VStack {
-                            HStack {
-                                Image(systemName: "percent")
-                                    .foregroundStyle(.white)
-                                Text("Interest Rate")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack {
+                                    Image(systemName: "percent")
+                                    Text("Interest Rate")
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Percent", text: $interestRate_Amount)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Percent", text: $interestRate_Amount)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
-                        }
-                        .padding(.bottom)
-                        
-                        VStack {
-                            HStack{
-                                Image(systemName: "calendar.badge.clock")
-                                    .foregroundStyle(.white)
-                                Text("Years Invested")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack{
+                                    Image(systemName: "calendar.badge.clock")
+                                    Text("Years Invested")
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Years", text: $yearsInvested_Amount)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Years", text: $yearsInvested_Amount)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
+                            if initialInvestment_Amount.isEmpty || interestRate_Amount.isEmpty || yearsInvested_Amount.isEmpty {
+                                Button(action: calculateTotal) {
+                                    Text("Calculate")
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(.gray)
+                                        .cornerRadius(10)
+                                }
+                                .disabled(true)
+                            } else {
+                                Button(action: calculateTotal) {
+                                    Text("Calculate")
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(.green)
+                                        .cornerRadius(10)
+                                }
+                            }
                         }
-                        .padding(.bottom)
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
                         
                         VStack{
                             Text("Total Amount")
                                 .font(.title3)
-                                .fontWeight(.heavy)
-                                .fontDesign(.monospaced)
+                                .fontWeight(.bold)
                             Spacer()
                             Text("$ \(totalAmount_Amount, specifier: "%.2f")")
                                 .font(.title3)
-                            
-                            Button(action: calculateTotal) {
-                                Text("Calculate")
-                            }
-                            .buttonStyle(.bordered)
-                            
-                            .disabled(initialInvestment_Amount.isEmpty || interestRate_Amount.isEmpty || yearsInvested_Amount.isEmpty)
                         }
+                        .padding()
                         
                     case 1:
                         VStack {
-                            HStack {
-                                Image(systemName: "dollarsign.circle") .foregroundStyle(.white)
-                                Text("Initial Investment")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack {
+                                    Image(systemName: "dollarsign.circle")
+                                    Text("Initial Investment")
+                                    
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Amount", text: $initialInvestment_Rate)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Amount", text: $initialInvestment_Rate)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
-                        }
-                        .padding(.bottom)
-                        
-                        VStack {
-                            HStack {
-                                Image(systemName: "equal.square") .foregroundStyle(.white)
-                                Text("Total Amount")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack {
+                                    Image(systemName: "equal.square")
+                                    Text("Total Amount")
+                                    
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Total", text: $totalAmount_Rate)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Total", text: $totalAmount_Rate)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
-                        }
-                        .padding(.bottom)
-                        
-                        VStack {
-                            HStack{
-                                Image(systemName: "calendar.badge.clock")
-                                    .foregroundStyle(.white)
-                                Text("Years Invested")
-                                    .fontDesign(.monospaced)
-                                    .font(.headline)
-                                Spacer()
+                            VStack {
+                                HStack {
+                                    Image(systemName: "calendar.badge.clock")
+                                    
+                                    Text("Years Invested")
+                                    
+                                        .font(.headline)
+                                    Spacer()
+                                }
+                                
+                                TextField("Years", text: $yearsInvested_Rate)
+                                    .keyboardType(.decimalPad)
+                                    .textFieldStyle(.roundedBorder)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(.white, lineWidth: 2)
+                                    )
                             }
+                            .padding(.bottom)
                             
-                            TextField("Years", text: $yearsInvested_Rate)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(.white, lineWidth: 2)
-                                )
+                            if initialInvestment_Rate.isEmpty || totalAmount_Rate.isEmpty || yearsInvested_Rate.isEmpty {
+                                Button(action: calculateRate) {
+                                    Text("Calculate")
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(.gray)
+                                        .cornerRadius(10)
+                                }
+                                .disabled(true)
+                            } else {
+                                Button(action: calculateRate) {
+                                    Text("Calculate")
+                                        .padding()
+                                        .foregroundColor(.white)
+                                        .background(.green)
+                                        .cornerRadius(10)
+                                }
+                            }
                         }
-                        .padding(.bottom)
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
                         
                         VStack{
                             Text("Interest Rate")
                                 .font(.title3)
-                                .fontWeight(.heavy)
-                                .fontDesign(.monospaced)
+                                .fontWeight(.bold)
                             Spacer()
                             Text(" \(interestRate_Rate, specifier: "%.2f") %")
                                 .font(.title3)
-                            
-                            
-                            Button(action: calculateRate) {
-                                Text("Calculate")
-                            }
-                            .buttonStyle(.bordered)
-                            
-                            .disabled(initialInvestment_Rate.isEmpty || totalAmount_Rate.isEmpty || yearsInvested_Rate.isEmpty)
                         }
-                        
+                        .padding()
                     default:
                         Text("Error.")
                     }
                 }
-                .padding()
             }
-            .preferredColorScheme(.dark)
+            .padding()
         }
     }
 }
