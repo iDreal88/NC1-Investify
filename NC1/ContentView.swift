@@ -122,7 +122,7 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.gray)
+                                        .background(.secondary)
                                         .cornerRadius(10)
                                 }
                                 .disabled(true)
@@ -215,7 +215,7 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.gray)
+                                        .background(.secondary)
                                         .cornerRadius(10)
                                 }
                                 .disabled(true)
