@@ -74,13 +74,9 @@ struct ContentView: View {
                                 TextField("Amount", text: $initialInvestment_Amount)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
-                            
+
                             VStack {
                                 HStack {
                                     Image(systemName: "percent")
@@ -92,10 +88,6 @@ struct ContentView: View {
                                 TextField("Percent", text: $interestRate_Amount)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
                             
@@ -110,10 +102,6 @@ struct ContentView: View {
                                 TextField("Years", text: $yearsInvested_Amount)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
                             
@@ -156,7 +144,6 @@ struct ContentView: View {
                                 HStack {
                                     Image(systemName: "dollarsign.circle")
                                     Text("Initial Investment")
-                                    
                                         .font(.headline)
                                     Spacer()
                                 }
@@ -164,10 +151,6 @@ struct ContentView: View {
                                 TextField("Amount", text: $initialInvestment_Rate)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
                             
@@ -175,7 +158,6 @@ struct ContentView: View {
                                 HStack {
                                     Image(systemName: "equal.square")
                                     Text("Total Amount")
-                                    
                                         .font(.headline)
                                     Spacer()
                                 }
@@ -183,19 +165,13 @@ struct ContentView: View {
                                 TextField("Total", text: $totalAmount_Rate)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
                             
                             VStack {
                                 HStack {
                                     Image(systemName: "calendar.badge.clock")
-                                    
                                     Text("Years Invested")
-                                    
                                         .font(.headline)
                                     Spacer()
                                 }
@@ -203,10 +179,6 @@ struct ContentView: View {
                                 TextField("Years", text: $yearsInvested_Rate)
                                     .keyboardType(.decimalPad)
                                     .textFieldStyle(.roundedBorder)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(.white, lineWidth: 2)
-                                    )
                             }
                             .padding(.bottom)
                             
