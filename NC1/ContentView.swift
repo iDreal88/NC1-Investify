@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    // Initalize Variable Total Amount
+    // Initialize Variable Total Amount
     @State private var initialInvestment_Amount = ""
     @State private var interestRate_Amount = ""
     @State private var yearsInvested_Amount = ""
@@ -19,10 +18,9 @@ struct ContentView: View {
     
     // Total Amount
     func calculateTotal() {
-        guard
-            let initialInvestment_Amount = Double(initialInvestment_Amount),
-            let interestRate_Amount = Double(interestRate_Amount),
-            let yearsInvested_Amount = Double(yearsInvested_Amount)
+        guard let initialInvestment_Amount = Double(initialInvestment_Amount),
+              let interestRate_Amount = Double(interestRate_Amount),
+              let yearsInvested_Amount = Double(yearsInvested_Amount)
         else {
             return
         }
@@ -33,20 +31,20 @@ struct ContentView: View {
     }
     
     // Interest Rate
-    func calculateRate(){
-        guard
-            let totalAmount_Rate = Double(self.totalAmount_Rate),
-            let initialInvestment_Rate = Double(self.initialInvestment_Rate),
-            let yearsInvested_Rate = Double(self.yearsInvested_Rate) else {
+    func calculateRate() {
+        guard let totalAmount_Rate = Double(self.totalAmount_Rate),
+              let initialInvestment_Rate = Double(self.initialInvestment_Rate),
+              let yearsInvested_Rate = Double(self.yearsInvested_Rate)
+        else {
             return
         }
         
-        let interestRate_Rate =  ((totalAmount_Rate / initialInvestment_Rate - 1) / yearsInvested_Rate) * 100
+        let interestRate_Rate = ((totalAmount_Rate / initialInvestment_Rate - 1) / yearsInvested_Rate) * 100
         self.interestRate_Rate = interestRate_Rate
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 VStack {
                     Picker(selection: $selectedPicker, label: Text("picker")) {
@@ -55,7 +53,7 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .padding(.vertical)
+                    .padding()
                     .navigationTitle("Investment Calculator")
                 }
                 
@@ -76,7 +74,7 @@ struct ContentView: View {
                                     .textFieldStyle(.roundedBorder)
                             }
                             .padding(.bottom)
-
+                            
                             VStack {
                                 HStack {
                                     Image(systemName: "percent")
@@ -92,7 +90,7 @@ struct ContentView: View {
                             .padding(.bottom)
                             
                             VStack {
-                                HStack{
+                                HStack {
                                     Image(systemName: "calendar.badge.clock")
                                     Text("Years Invested")
                                         .font(.headline)
@@ -110,8 +108,10 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.secondary)
-                                        .cornerRadius(10)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.secondary)
+                                        )
                                 }
                                 .disabled(true)
                             } else {
@@ -119,16 +119,22 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.green)
-                                        .cornerRadius(10)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.green)
+                                        )
                                 }
                             }
                         }
                         .padding()
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .shadow(radius: 2)
+                        )
+                        .padding()
                         
-                        VStack{
+                        VStack {
                             Text("Total Amount")
                                 .font(.title3)
                                 .fontWeight(.bold)
@@ -136,7 +142,14 @@ struct ContentView: View {
                             Text("$ \(totalAmount_Amount, specifier: "%.2f")")
                                 .font(.title3)
                         }
+                        .frame(maxWidth: .infinity)
                         .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .shadow(radius: 2)
+                        )
+                        .padding(.horizontal)
                         
                     case 1:
                         VStack {
@@ -187,8 +200,10 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.secondary)
-                                        .cornerRadius(10)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.secondary)
+                                        )
                                 }
                                 .disabled(true)
                             } else {
@@ -196,16 +211,22 @@ struct ContentView: View {
                                     Text("Calculate")
                                         .padding()
                                         .foregroundColor(.white)
-                                        .background(.green)
-                                        .cornerRadius(10)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Color.green)
+                                        )
                                 }
                             }
                         }
                         .padding()
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .shadow(radius: 2)
+                        )
+                        .padding()
                         
-                        VStack{
+                        VStack {
                             Text("Interest Rate")
                                 .font(.title3)
                                 .fontWeight(.bold)
@@ -213,13 +234,23 @@ struct ContentView: View {
                             Text(" \(interestRate_Rate, specifier: "%.2f") %")
                                 .font(.title3)
                         }
+                        .frame(maxWidth: .infinity)
                         .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .shadow(radius: 2)
+                        )
+                        .padding(.horizontal)
+                        
                     default:
                         Text("Error.")
+                            .foregroundColor(.red)
                     }
                 }
             }
-            .padding()
+            
+            
         }
     }
 }
