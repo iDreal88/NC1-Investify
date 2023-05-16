@@ -43,6 +43,18 @@ struct ContentView: View {
         self.interestRate_Rate = interestRate_Rate
     }
     
+    // Function to clear input fields
+    func clearInputFields() {
+        initialInvestment_Amount = ""
+        interestRate_Amount = ""
+        yearsInvested_Amount = ""
+        totalAmount_Amount = 0.0
+        initialInvestment_Rate = ""
+        interestRate_Rate = 0.0
+        yearsInvested_Rate = ""
+        totalAmount_Rate = ""
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -124,6 +136,16 @@ struct ContentView: View {
                                         .background(.primary)
                                         .cornerRadius(10)
                                 }
+                            }
+                            // Clear Button
+                            Button(action: clearInputFields) {
+                                Text("Clear All")
+                                    .padding()
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.red)
+                                    .cornerRadius(10)
                             }
                         }
                         
@@ -216,6 +238,17 @@ struct ContentView: View {
                                         .cornerRadius(10)
                                 }
                             }
+                            
+                            // Clear Button
+                            Button(action: clearInputFields) {
+                                Text("Clear All")
+                                    .padding()
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.red)
+                                    .cornerRadius(10)
+                            }
                         }
                         
                         .padding()
@@ -247,11 +280,11 @@ struct ContentView: View {
                     }
                 }
             }
-            
-            
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
