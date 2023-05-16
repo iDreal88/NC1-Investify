@@ -107,31 +107,31 @@ struct ContentView: View {
                                 Button(action: calculateTotal) {
                                     Text("Calculate")
                                         .padding()
+                                        .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.secondary)
-                                        )
+                                        .frame(maxWidth: .infinity)
+                                        .background(.secondary)
+                                        .cornerRadius(10)
                                 }
                                 .disabled(true)
                             } else {
                                 Button(action: calculateTotal) {
                                     Text("Calculate")
                                         .padding()
+                                        .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.green)
-                                        )
+                                        .frame(maxWidth: .infinity)
+                                        .background(.primary)
+                                        .cornerRadius(10)
                                 }
                             }
                         }
+                        
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.ultraThinMaterial)
-                                .shadow(radius: 1)
-                        )
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
+                        .shadow(radius: 1)
                         .padding()
                         
                         VStack {
@@ -142,13 +142,12 @@ struct ContentView: View {
                             Text("$ \(totalAmount_Amount, specifier: "%.2f")")
                                 .font(.title3)
                         }
-                        .frame(maxWidth: .infinity)
+                        
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.ultraThinMaterial)
-                                .shadow(radius: 1)
-                        )
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
+                        .shadow(radius: 1)
                         .padding(.horizontal)
                         
                     case 1:
@@ -199,31 +198,31 @@ struct ContentView: View {
                                 Button(action: calculateRate) {
                                     Text("Calculate")
                                         .padding()
+                                        .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.secondary)
-                                        )
+                                        .frame(maxWidth: .infinity)
+                                        .background(.secondary)
+                                        .cornerRadius(10)
                                 }
                                 .disabled(true)
                             } else {
                                 Button(action: calculateRate) {
                                     Text("Calculate")
                                         .padding()
+                                        .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Color.green)
-                                        )
+                                        .frame(maxWidth: .infinity)
+                                        .background(.primary)
+                                        .cornerRadius(10)
                                 }
                             }
                         }
+                        
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.ultraThinMaterial)
-                                .shadow(radius: 1)
-                        )
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
+                        .shadow(radius: 1)
                         .padding()
                         
                         VStack {
@@ -234,13 +233,12 @@ struct ContentView: View {
                             Text(" \(interestRate_Rate, specifier: "%.2f") %")
                                 .font(.title3)
                         }
-                        .frame(maxWidth: .infinity)
+                        
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.ultraThinMaterial)
-                                .shadow(radius: 1)
-                        )
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(20)
+                        .shadow(radius: 1)
                         .padding(.horizontal)
                         
                     default:
