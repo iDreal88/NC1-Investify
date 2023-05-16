@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var selectedPicker = 0
     let picker = ["Total Amount", "Interest Rate"]
     
-    // Total Amount
+    // Function Calculate Total Amount
     func calculateTotal() {
         guard let initialInvestment_Amount = Double(initialInvestment_Amount),
               let interestRate_Amount = Double(interestRate_Amount),
@@ -30,7 +30,7 @@ struct ContentView: View {
         self.totalAmount_Amount = totalAmount_Amount
     }
     
-    // Interest Rate
+    // Function Calculate Interest Rate
     func calculateRate() {
         guard let totalAmount_Rate = Double(self.totalAmount_Rate),
               let initialInvestment_Rate = Double(self.initialInvestment_Rate),
@@ -43,16 +43,21 @@ struct ContentView: View {
         self.interestRate_Rate = interestRate_Rate
     }
     
-    // Function to clear input fields
-    func clearInputFields() {
+    // Function Clear Input Fields Total Amount
+    func clearInputFieldsTotalAmount() {
         initialInvestment_Amount = ""
         interestRate_Amount = ""
         yearsInvested_Amount = ""
         totalAmount_Amount = 0.0
+    }
+    
+    // Function Clear Input Fields Interest Rate
+    func clearInputFieldsInterestRate() {
         initialInvestment_Rate = ""
-        interestRate_Rate = 0.0
-        yearsInvested_Rate = ""
         totalAmount_Rate = ""
+        yearsInvested_Rate = ""
+        interestRate_Rate = 0.0
+     
     }
     
     var body: some View {
@@ -71,6 +76,8 @@ struct ContentView: View {
                 
                 VStack {
                     switch selectedPicker {
+                        
+                    // Total Amount
                     case 0:
                         VStack {
                             VStack {
@@ -115,6 +122,7 @@ struct ContentView: View {
                             }
                             .padding(.bottom)
                             
+                            // If Field is Empty -> Button Disabled
                             if initialInvestment_Amount.isEmpty || interestRate_Amount.isEmpty || yearsInvested_Amount.isEmpty {
                                 Button(action: calculateTotal) {
                                     Text("Calculate")
@@ -126,6 +134,8 @@ struct ContentView: View {
                                         .cornerRadius(10)
                                 }
                                 .disabled(true)
+                                
+                            // Else -> Button Changed to Primary
                             } else {
                                 Button(action: calculateTotal) {
                                     Text("Calculate")
@@ -137,8 +147,9 @@ struct ContentView: View {
                                         .cornerRadius(10)
                                 }
                             }
-                            // Clear Button
-                            Button(action: clearInputFields) {
+                            
+                            // Clear All Field Button
+                            Button(action: clearInputFieldsTotalAmount) {
                                 Text("Clear All")
                                     .padding()
                                     .fontWeight(.bold)
@@ -172,6 +183,7 @@ struct ContentView: View {
                         .shadow(radius: 1)
                         .padding(.horizontal)
                         
+                    // Interest Rate
                     case 1:
                         VStack {
                             VStack {
@@ -216,6 +228,7 @@ struct ContentView: View {
                             }
                             .padding(.bottom)
                             
+                            // If Field is Empty -> Button Disabled
                             if initialInvestment_Rate.isEmpty || totalAmount_Rate.isEmpty || yearsInvested_Rate.isEmpty {
                                 Button(action: calculateRate) {
                                     Text("Calculate")
@@ -227,6 +240,8 @@ struct ContentView: View {
                                         .cornerRadius(10)
                                 }
                                 .disabled(true)
+                                
+                            // Else -> Button Changed to Primary
                             } else {
                                 Button(action: calculateRate) {
                                     Text("Calculate")
@@ -239,8 +254,8 @@ struct ContentView: View {
                                 }
                             }
                             
-                            // Clear Button
-                            Button(action: clearInputFields) {
+                            // Clear All Field Button
+                            Button(action: clearInputFieldsInterestRate) {
                                 Text("Clear All")
                                     .padding()
                                     .fontWeight(.bold)
