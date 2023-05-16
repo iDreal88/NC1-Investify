@@ -57,7 +57,6 @@ struct ContentView: View {
         totalAmount_Rate = ""
         yearsInvested_Rate = ""
         interestRate_Rate = 0.0
-     
     }
     
     var body: some View {
