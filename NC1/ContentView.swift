@@ -53,7 +53,7 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .padding()
+                    .padding(.horizontal)
                     .navigationTitle("Investment Calculator")
                 }
                 
@@ -130,7 +130,7 @@ struct ContentView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.ultraThinMaterial)
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         )
                         .padding()
                         
@@ -147,7 +147,7 @@ struct ContentView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.ultraThinMaterial)
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         )
                         .padding(.horizontal)
                         
@@ -222,7 +222,7 @@ struct ContentView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.ultraThinMaterial)
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         )
                         .padding()
                         
@@ -239,7 +239,7 @@ struct ContentView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.ultraThinMaterial)
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                         )
                         .padding(.horizontal)
                         
