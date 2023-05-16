@@ -54,7 +54,7 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
-                    .navigationTitle("Investment Calculator")
+                    .navigationTitle("Calculation")
                 }
                 
                 VStack {
